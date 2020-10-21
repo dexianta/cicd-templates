@@ -19,3 +19,7 @@ if cicd_tool == 'Azure DevOps':
     # remove top-level file inside the generated folder
     remove('.github')
 	
+# remove job_spec_{cloud}.json from each folder
+cloud = '{{cookiecutter.cloud}}'.lower()
+for folder in ["pipelines", "integration-tests", "dev-tests"]:
+    remove('{}/pipeline1/job_spec_{}.json'.format(folder, cloud)) 
