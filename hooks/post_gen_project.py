@@ -24,3 +24,12 @@ if cicd_tool == 'Azure DevOps':
 cloud = string.lower('{{cookiecutter.cloud}}')
 for folder in ["pipelines", "integration-tests", "dev-tests"]:
     remove('{}/pipeline1/job_spec_{}.json'.format(folder, cloud)) 
+
+# remove job_spec_{cloud}.json from each folder
+cloud = '{{cookiecutter.cloud}}'.lower()
+for folder in ['pipelines', 'integration-tests', 'dev-tests']:
+    for num in ['1', '2']:
+        if cloud == 'azure':
+            remove('{}/pipeline{}/job_spec_aws.json'.format(folder, num)) 
+        if cloud == 'aws':
+            remove('{}/pipeline{}/job_spec_azure.json'.format(folder, num)) 
