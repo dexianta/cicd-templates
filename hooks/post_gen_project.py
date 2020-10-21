@@ -1,6 +1,7 @@
 # cat post_gen_project.py
 import os
 import shutil
+import string
 
 print(os.getcwd())  # prints /absolute/path/to/{{cookiecutter.project_slug}}
 
@@ -19,3 +20,7 @@ if cicd_tool == 'Azure DevOps':
     # remove top-level file inside the generated folder
     remove('.github')
 	
+# remove job_spec_{cloud}.json from each folder
+cloud = string.lower('{{cookiecutter.cloud}}')
+for folder in ["pipelines", "integration-tests", "dev-tests"]:
+    remove('{}/pipeline1/job_spec_{}.json'.format(folder, cloud)) 
